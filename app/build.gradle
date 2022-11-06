@@ -25,30 +25,30 @@ android {
         }
     }
 
-    buildTypes {
+    /*buildTypes {
         debug {
             versionNameSuffix "-debug"
             applicationIdSuffix ".debug"
             signingConfig signingConfigs.debug
         }
         release {
-            minifyEnabled true
-            shrinkResources true
+            *//*shrinkResources false*//*
+            minifyEnabled false
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             signingConfig signingConfigs.release
         }
-    }
+    }*/
 
     flavorDimensions "environment"
     productFlavors {
         dev {
             dimension "environment"
-            buildConfigField "String", "BACKEND_URL", '"https://pokeapi.co/"'
+            buildConfigField "String", "BACKEND_URL", '"https://api.coingecko.com/api/v3/"'
         }
 
         prod {
             dimension "environment"
-            buildConfigField "String", "BACKEND_URL", '"https://pokeapi.co/"'
+            buildConfigField "String", "BACKEND_URL", '"https://api.coingecko.com/api/v3/"'
         }
     }
 

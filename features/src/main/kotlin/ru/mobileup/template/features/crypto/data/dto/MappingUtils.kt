@@ -1,4 +1,4 @@
-package ru.mobileup.template.features.pokemons.data.dto
+package ru.mobileup.template.features.crypto.data.dto
 
 fun parseId(url: String): String {
     return url.split("/").dropLast(1).last()
@@ -18,4 +18,12 @@ fun hectogramsToKilograms(weight: Int): Float {
 
 fun getImageUrl(id: String): String {
     return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png"
+}
+
+fun rowPriceToFormat(price: Double): String {
+    return price.toString()//String.format("%,f", price)
+}
+
+fun rowPercentageToFormat(percentage: Double): String {
+    return String.format("%.2f", percentage)
 }

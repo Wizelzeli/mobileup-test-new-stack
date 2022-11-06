@@ -1,4 +1,4 @@
-package ru.mobileup.template.features.pokemons.ui.list
+package ru.mobileup.template.features.crypto.ui.list
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -11,12 +11,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.mobileup.template.core.theme.AppTheme
-import ru.mobileup.template.features.pokemons.domain.PokemonType
+import ru.mobileup.template.features.crypto.domain.CryptoValue
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun PokemonTypeItem(
-    type: PokemonType,
+fun CryptoValueItem(
+    type: CryptoValue,
     modifier: Modifier = Modifier,
     isSelected: Boolean = false,
     onClick: (() -> Unit)? = null
@@ -33,9 +33,9 @@ fun PokemonTypeItem(
         elevation = 6.dp
     ) {
         Text(
-            text = type.name,
+            text = type.name.value,
             style = MaterialTheme.typography.body1,
-            modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)
+            modifier = Modifier.padding(horizontal = 24.dp, vertical = 8.dp)
         )
     }
 }
@@ -45,8 +45,8 @@ fun PokemonTypeItem(
 fun PokemonTypeItemPreview() {
     var isSelected by remember { mutableStateOf(false) }
     AppTheme {
-        PokemonTypeItem(
-            type = PokemonType.Fire,
+        CryptoValueItem(
+            type = CryptoValue.Eur,
             isSelected = isSelected,
             onClick = {
                 isSelected = !isSelected

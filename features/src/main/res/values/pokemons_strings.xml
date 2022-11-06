@@ -1,7 +1,16 @@
 <resources>
     <!-- List -->
-    <string name="pokemons_select_type">Pokemon types</string>
+
     <string name="pokemons_empty_description">Pokemons are not found</string>
+    <string name="crypto_description">Описание</string>
+    <string name="crypto_categories">Категории</string>
+    <string name="crypto_list">Список криптовалют</string>
+    <string name="crypto_percent_minus">%1$s%%</string>
+    <string name="crypto_percent_plus">+%1$s%%</string>
+    <string name="crypto_eur">€ %1$s</string>
+    <string name="crypto_usd">$ %1$s</string>
+
+
 
     <!-- Details -->
     <string name="pokemons_types">Types:</string>
