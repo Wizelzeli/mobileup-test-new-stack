@@ -33,6 +33,7 @@ import ru.mobileup.template.core.widget.SwipeRefreshLceWidget
 import ru.mobileup.template.features.crypto.domain.Crypto
 import ru.mobileup.template.features.crypto.domain.CryptoId
 import ru.mobileup.template.features.crypto.domain.CryptoValueName
+import ru.mobileup.template.features.crypto.ui.CryptoTheme
 import java.util.*
 
 
@@ -120,7 +121,7 @@ private fun CryptoItem(
                     .padding(top = 8.dp, start = 16.dp, bottom = 8.dp, end = 8.dp)
                     .size(40.dp)
                     .clip(CircleShape)
-                    .background(color = MaterialTheme.colors.primary)
+                    .background(color = CryptoTheme.colors.background.primary)
             )
         }
 

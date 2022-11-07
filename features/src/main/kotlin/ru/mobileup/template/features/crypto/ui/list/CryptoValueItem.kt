@@ -12,6 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.mobileup.template.core.theme.AppTheme
 import ru.mobileup.template.features.crypto.domain.CryptoValue
+import ru.mobileup.template.features.crypto.ui.CryptoTheme
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -27,15 +28,18 @@ fun CryptoValueItem(
         enabled = onClick != null,
         shape = RoundedCornerShape(48.dp),
         color = when (isSelected) {
-            true -> MaterialTheme.colors.primary
-            else -> MaterialTheme.colors.surface
-        },
-        elevation = 6.dp
+            true -> CryptoTheme.colors.background.selectedChips
+            else -> CryptoTheme.colors.background.disabledChips
+        }
     ) {
         Text(
+            color = when (isSelected) {
+                true -> CryptoTheme.colors.text.selectedChips
+                else -> CryptoTheme.colors.text.disabledChips
+            },
             text = type.name.value,
-            style = MaterialTheme.typography.body1,
-            modifier = Modifier.padding(horizontal = 24.dp, vertical = 8.dp)
+            style = CryptoTheme.typography.body.regularLarge,
+            modifier = Modifier.padding(horizontal = 24.dp, vertical = 8.dp),
         )
     }
 }

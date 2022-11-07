@@ -65,7 +65,7 @@ private fun CryptoStatusBarRow(
 ) {
     Surface(
         modifier = modifier.fillMaxWidth(),
-        color = MaterialTheme.colors.background,
+        color = CryptoTheme.colors.background.primary,
         elevation = 12.dp
     ) {
         Row {
@@ -123,7 +123,7 @@ fun CryptoDetailsBlock(
         Text(
             modifier = Modifier.padding(top = 16.dp),
             text = cryptoDetails.description,
-            style = CryptoTheme.typography.title.boldLarge,
+            style = CryptoTheme.typography.body.regularLarge,
             color = CryptoTheme.colors.text.titleDesc
         )
         Text(
@@ -140,8 +140,8 @@ fun CryptoDetailsBlock(
         Text(
             modifier = Modifier.padding(top = 16.dp, bottom = 32.dp),
             text = categories,
-            style = CryptoTheme.typography.title.boldLarge,
-            color = CryptoTheme.colors.text.titleCrypto
+            style = CryptoTheme.typography.body.regularLarge,
+            color = CryptoTheme.colors.text.titleDesc
         )
 
 
