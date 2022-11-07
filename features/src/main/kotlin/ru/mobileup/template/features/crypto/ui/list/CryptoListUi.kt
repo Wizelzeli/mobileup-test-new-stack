@@ -206,7 +206,7 @@ private fun CryptoValuesRow(
     Surface(
         modifier = modifier.fillMaxWidth(),
         color = MaterialTheme.colors.background,
-        elevation = 4.dp
+        elevation = 12.dp
     ) {
         Column {
             Text(

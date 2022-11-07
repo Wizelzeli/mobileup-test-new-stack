@@ -24,6 +24,7 @@ import ru.mobileup.template.core.widget.RefreshingProgress
 import ru.mobileup.template.core.widget.SwipeRefreshLceWidget
 import ru.mobileup.template.features.R
 import ru.mobileup.template.features.crypto.domain.CryptoDetails
+import ru.mobileup.template.features.crypto.ui.CryptoTheme
 
 @Composable
 fun CryptoDetailsUi(
@@ -65,7 +66,7 @@ private fun CryptoStatusBarRow(
     Surface(
         modifier = modifier.fillMaxWidth(),
         color = MaterialTheme.colors.background,
-        elevation = 4.dp
+        elevation = 12.dp
     ) {
         Row {
             Image(
@@ -81,7 +82,9 @@ private fun CryptoStatusBarRow(
                 modifier = modifier
                     .align(Alignment.CenterVertically)
                     .padding(start = 16.dp),
-                text = name
+                text = name,
+                style = CryptoTheme.typography.title.boldLarge,
+                color = CryptoTheme.colors.text.titleCrypto
             )
         }
 
@@ -110,18 +113,24 @@ fun CryptoDetailsBlock(
                 .align(Alignment.CenterHorizontally)
                 .size(90.dp)
                 .clip(CircleShape)
-                .background(color = MaterialTheme.colors.primary)
+                .background(color = CryptoTheme.colors.background.primary)
         )
         Text(
-            text = stringResource(R.string.crypto_description)
+            text = stringResource(R.string.crypto_description),
+            style = CryptoTheme.typography.title.boldLarge,
+            color = CryptoTheme.colors.text.titleDesc
         )
         Text(
             modifier = Modifier.padding(top = 16.dp),
-            text = cryptoDetails.description
+            text = cryptoDetails.description,
+            style = CryptoTheme.typography.title.boldLarge,
+            color = CryptoTheme.colors.text.titleDesc
         )
         Text(
             modifier = Modifier.padding(top = 16.dp),
-            text = stringResource(R.string.crypto_categories)
+            text = stringResource(R.string.crypto_categories),
+            style = CryptoTheme.typography.title.boldLarge,
+            color = CryptoTheme.colors.text.titleDesc
         )
         var categories = ""
         cryptoDetails.categories.forEachIndexed { i, category ->
@@ -130,7 +139,9 @@ fun CryptoDetailsBlock(
         }
         Text(
             modifier = Modifier.padding(top = 16.dp, bottom = 32.dp),
-            text = categories
+            text = categories,
+            style = CryptoTheme.typography.title.boldLarge,
+            color = CryptoTheme.colors.text.titleCrypto
         )
 
 
