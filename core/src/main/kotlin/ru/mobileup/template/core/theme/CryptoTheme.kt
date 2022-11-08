@@ -9,21 +9,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import ru.mobileup.template.core.theme.*
 
-/*@Composable
-fun CryptoTheme(
-    colors: CryptoColors,
-    typography: CryptoTypography,
-    content: @Composable () -> Unit
-) {
-
-    CompositionLocalProvider(
-        LocalCryptoColors provides colors,
-        LocalCryptoTypography provides typography
-    ) {
-        content()
-    }
-}*/
-
 object CryptoTheme {
     private val LocalCryptoColors = staticCompositionLocalOf<CryptoColors?> {
         CryptoColors(

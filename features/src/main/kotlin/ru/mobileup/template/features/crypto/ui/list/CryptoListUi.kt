@@ -36,7 +36,6 @@ import ru.mobileup.template.features.crypto.domain.CryptoValueName
 import ru.mobileup.template.features.crypto.ui.CryptoTheme
 import java.util.*
 
-
 @Composable
 fun CryptoListUi(
     component: CryptoListComponent,
@@ -117,55 +116,77 @@ private fun CryptoItem(
                     .crossfade(true)
                     .build(),
                 contentScale = ContentScale.Crop,
-                modifier = Modifier
+                modifier = modifier
                     .padding(top = 8.dp, start = 16.dp, bottom = 8.dp, end = 8.dp)
                     .size(40.dp)
                     .clip(CircleShape)
                     .background(color = CryptoTheme.colors.background.primary)
             )
         }
-
-        Column(Modifier.weight(1.0F)) {
+        Column(modifier.weight(1.0F)) {
             Text(
                 modifier = modifier
                     .padding(top = 8.dp),
-                text = crypto.name
+                text = crypto.name,
+                color = CryptoTheme.colors.text.primaryCrypto,
+                style = CryptoTheme.typography.body.regularLarge
             )
             Text(
                 modifier = modifier,
-                text = crypto.symbol.uppercase()
+                text = crypto.symbol.uppercase(),
+                color = CryptoTheme.colors.text.shortCrypto,
+                style = CryptoTheme.typography.body.regularNormal
             )
         }
-        Column(Modifier.padding(end = 16.dp)) {
+        Column(modifier.padding(end = 16.dp)) {
             when (component.selectedValue) {
                 CryptoValue.Eur.name ->
                     Text(
                         modifier = modifier
                             .padding(top = 8.dp)
                             .align(Alignment.End),
-                        text = stringResource(R.string.crypto_eur, "%,f".format(Locale.ENGLISH, crypto.currentPrice).dropLast(4))
+                        text = stringResource(
+                            R.string.crypto_eur,
+                            "%,f".format(Locale.ENGLISH, crypto.currentPrice).dropLast(4)
+                        ),
+                        color = CryptoTheme.colors.text.primaryCrypto,
+                        style = CryptoTheme.typography.body.boldSmall
                     )
                 CryptoValue.Usd.name ->
                     Text(
                         modifier = modifier
                             .padding(top = 8.dp)
                             .align(Alignment.End),
-                        text = stringResource(R.string.crypto_usd, "%,f".format(Locale.ENGLISH, crypto.currentPrice).dropLast(4))
+                        text = stringResource(
+                            R.string.crypto_usd,
+                            "%,f".format(Locale.ENGLISH, crypto.currentPrice).dropLast(4)
+                        ),
+                        color = CryptoTheme.colors.text.primaryCrypto,
+                        style = CryptoTheme.typography.body.boldSmall
                     )
             }
-            Text(
-                modifier = modifier
-                    .align(Alignment.End),
-                text = if (crypto.priceChangePercentage > 0)
-                    stringResource(
+            if (crypto.priceChangePercentage >= 0) {
+                Text(
+                    modifier = modifier
+                        .align(Alignment.End),
+                    text = stringResource(
                         R.string.crypto_percent_plus,
                         "%.2f".format(Locale.ROOT, crypto.priceChangePercentage)
-                    )
-                else stringResource(
-                    R.string.crypto_percent_minus,
-                    "%.2f".format(Locale.ROOT, crypto.priceChangePercentage)
+                    ),
+                    color = CryptoTheme.colors.text.plusCryptoPercent,
+                    style = CryptoTheme.typography.body.regularNormal
                 )
-            )
+            } else
+                Text(
+                    modifier = modifier
+                        .align(Alignment.End),
+                    text = stringResource(
+                        R.string.crypto_percent_minus,
+                        "%.2f".format(Locale.ROOT, crypto.priceChangePercentage)
+                    ),
+                    color = CryptoTheme.colors.text.minusCryptoPercent,
+                    style = CryptoTheme.typography.body.regularNormal
+                )
         }
     }
 }
@@ -179,7 +200,7 @@ fun CryptoListUiPreview() {
 }
 
 
-@Composable
+/*@Composable
 fun CryptoItemPreview() {
     AppTheme {
         CryptoItem(
@@ -195,7 +216,7 @@ fun CryptoItemPreview() {
             onClick = { Unit }
         )
     }
-}
+}*/
 
 @Composable
 private fun CryptoValuesRow(
@@ -206,17 +227,17 @@ private fun CryptoValuesRow(
 ) {
     Surface(
         modifier = modifier.fillMaxWidth(),
-        color = MaterialTheme.colors.background,
+        color = CryptoTheme.colors.background.primary,
         elevation = 12.dp
     ) {
         Column {
             Text(
-                modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 12.dp),
+                modifier = modifier.padding(start = 16.dp, end = 16.dp, top = 12.dp),
                 text = stringResource(R.string.crypto_list),
-                style = MaterialTheme.typography.h6
+                style = CryptoTheme.typography.title.boldLarge
             )
             Row(
-                modifier = Modifier
+                modifier = modifier
                     .horizontalScroll(rememberScrollState())
                     .padding(horizontal = 16.dp, vertical = 12.dp)
                     .fillMaxWidth(),

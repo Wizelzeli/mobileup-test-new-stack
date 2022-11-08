@@ -11,9 +11,9 @@ import ru.mobileup.template.features.crypto.ui.CryptoColors
 import ru.mobileup.template.features.crypto.ui.TextColors
 
 private val LightColorPalette = lightColors(
-    primary = IndigoA700,
-    primaryVariant = IndigoA700,
-    secondary = Teal200
+    primary = OrangeChipsText,
+    primaryVariant = OrangeChipsText,
+    secondary = OrangeChipsText
 
     /* Other default colors to override
     background = Color.White,
@@ -37,7 +37,7 @@ fun AppTheme(
     content: @Composable () -> Unit
 ) {
     val colors = if (darkTheme) {
-        DarkColorPalette
+        LightColorPalette // not implemented yet
     } else {
         LightColorPalette
     }

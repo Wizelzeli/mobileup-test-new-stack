@@ -1,5 +1,8 @@
 package ru.mobileup.template.features.crypto.ui.details
 
+import android.os.Build
+import android.text.Html
+import android.widget.TextView
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -16,6 +19,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.viewinterop.AndroidView
+import androidx.core.text.HtmlCompat
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import me.aartikov.replica.single.Loadable
@@ -33,10 +38,10 @@ fun CryptoDetailsUi(
 ) {
     Surface(
         modifier = modifier.fillMaxSize(),
-        color = MaterialTheme.colors.background
+        color = CryptoTheme.colors.background.primary
     ) {
 
-        Column(modifier = Modifier.fillMaxSize()) {
+        Column(modifier = modifier.fillMaxSize()) {
             component.cryptoDetailsState.data?.name?.let {
                 CryptoStatusBarRow(
                     modifier = modifier,
@@ -48,9 +53,10 @@ fun CryptoDetailsUi(
                 state = component.cryptoDetailsState,
                 onRefresh = component::onRefresh,
                 onRetryClick = component::onRetryClick
+
             ) { crypto, refreshing ->
                 CryptoDetailsBlock(crypto)
-                RefreshingProgress(refreshing, modifier = Modifier.padding(top = 4.dp))
+                RefreshingProgress(refreshing, modifier = modifier.padding(top = 4.dp))
             }
 
         }
@@ -59,9 +65,9 @@ fun CryptoDetailsUi(
 
 @Composable
 private fun CryptoStatusBarRow(
-    modifier: Modifier = Modifier,
     name: String,
-    onBackPressed: () -> (Unit)
+    onBackPressed: () -> (Unit),
+    modifier: Modifier = Modifier
 ) {
     Surface(
         modifier = modifier.fillMaxWidth(),
@@ -70,7 +76,7 @@ private fun CryptoStatusBarRow(
     ) {
         Row {
             Image(
-                modifier = Modifier
+                modifier = modifier
                     .clickable { onBackPressed.invoke() }
                     .padding(20.dp)
                     .size(16.dp),
@@ -93,10 +99,11 @@ private fun CryptoStatusBarRow(
 
 @Composable
 fun CryptoDetailsBlock(
-    cryptoDetails: CryptoDetails
+    cryptoDetails: CryptoDetails,
+    modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(start = 16.dp, end = 16.dp)
             .verticalScroll(enabled = true, state = ScrollState(0))
@@ -108,7 +115,7 @@ fun CryptoDetailsBlock(
                 .crossfade(true)
                 .build(),
             contentScale = ContentScale.Crop,
-            modifier = Modifier
+            modifier = modifier
                 .padding(top = 10.dp, bottom = 16.dp)
                 .align(Alignment.CenterHorizontally)
                 .size(90.dp)
@@ -120,14 +127,28 @@ fun CryptoDetailsBlock(
             style = CryptoTheme.typography.title.boldLarge,
             color = CryptoTheme.colors.text.titleDesc
         )
-        Text(
-            modifier = Modifier.padding(top = 16.dp),
-            text = cryptoDetails.description,
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            AndroidView(
+                factory = { context ->
+                    TextView(context).apply {
+                        text = Html.fromHtml(
+                            cryptoDetails.description,
+                            Html.FROM_HTML_MODE_COMPACT
+                        )
+                    }
+                },
+                modifier = modifier.padding(top = 16.dp),
+            )
+        } else Text(
+            modifier = modifier.padding(top = 16.dp),
             style = CryptoTheme.typography.body.regularLarge,
-            color = CryptoTheme.colors.text.titleDesc
+            color = CryptoTheme.colors.text.titleDesc,
+            text = cryptoDetails.description,
         )
+
+
         Text(
-            modifier = Modifier.padding(top = 16.dp),
+            modifier = modifier.padding(top = 16.dp),
             text = stringResource(R.string.crypto_categories),
             style = CryptoTheme.typography.title.boldLarge,
             color = CryptoTheme.colors.text.titleDesc
@@ -138,7 +159,7 @@ fun CryptoDetailsBlock(
             else "$category, "
         }
         Text(
-            modifier = Modifier.padding(top = 16.dp, bottom = 32.dp),
+            modifier = modifier.padding(top = 16.dp, bottom = 32.dp),
             text = categories,
             style = CryptoTheme.typography.body.regularLarge,
             color = CryptoTheme.colors.text.titleDesc
