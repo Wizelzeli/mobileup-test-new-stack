@@ -2,6 +2,7 @@ package ru.mobileup.template.features.crypto.ui.details
 
 import android.os.Build
 import android.text.Html
+import android.text.method.LinkMovementMethod
 import android.widget.TextView
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -13,18 +14,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.text.HtmlCompat
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import me.aartikov.replica.single.Loadable
 import ru.mobileup.template.core.theme.AppTheme
+import ru.mobileup.template.core.theme.OrangeChipsText
 import ru.mobileup.template.core.widget.RefreshingProgress
 import ru.mobileup.template.core.widget.SwipeRefreshLceWidget
 import ru.mobileup.template.features.R
@@ -138,7 +143,12 @@ fun CryptoDetailsBlock(
                     }
                 },
                 modifier = modifier.padding(top = 16.dp),
-            )
+            ) {
+                it.movementMethod = LinkMovementMethod.getInstance()
+                it.setLinkTextColor(OrangeChipsText.toArgb())
+                it.textSize = 16f
+                it.setTextColor(Color.Black.toArgb())
+            }
         } else Text(
             modifier = modifier.padding(top = 16.dp),
             style = CryptoTheme.typography.body.regularLarge,

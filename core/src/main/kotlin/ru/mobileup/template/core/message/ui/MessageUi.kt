@@ -17,6 +17,7 @@ import me.aartikov.sesame.localizedstring.LocalizedString
 import ru.mobileup.template.core.message.domain.Message
 import ru.mobileup.template.core.theme.AppTheme
 import ru.mobileup.template.core.utils.resolve
+import ru.mobileup.template.features.crypto.ui.CryptoTheme
 
 /**
  * Displays a [Message] as a popup at the bottom of screen.
@@ -59,7 +60,7 @@ private fun MessagePopup(
     ) {
         Card(
             shape = RoundedCornerShape(8.dp),
-            backgroundColor = MaterialTheme.colors.background,
+            backgroundColor = CryptoTheme.colors.text.minusCryptoPercent,
             elevation = 3.dp,
             modifier = Modifier
                 .padding(bottom = bottomPadding, start = 8.dp, end = 8.dp)
@@ -82,8 +83,8 @@ private fun MessagePopup(
                 Text(
                     modifier = Modifier.weight(1f),
                     text = message.text.resolve(),
-                    color = MaterialTheme.colors.onBackground,
-                    style = MaterialTheme.typography.body1
+                    color = CryptoTheme.colors.background.primary,
+                    style = CryptoTheme.typography.body.regularNormal
                 )
                 message.actionTitle?.let {
                     MessageButton(text = it.resolve(), onClick = onAction)
